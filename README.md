@@ -25,9 +25,9 @@ This project is intended to install and use NLP Ipopt in the ubuntu ros environm
 	 ``` 
 5. Move HSL files (header files .h and library .so) to `usr/local`, one is include_directories as `usr/local/include`, another is target_link_directories `usr/local/lib`. Please pay attention to these two paths where our Ipopt will also be installed.
 	```
-	 mv lib/x86_64-linux-gnu/libcoinhsl.so /usr/local/lib
+	 sudo mv lib/x86_64-linux-gnu/libcoinhsl.so /usr/local/lib
 	 cd ~/Downloads/ThirdParty
-	 mv include hsl  # change hsl header folder name to 'hsl'
+	 sudo mv include hsl  # change hsl header folder name to 'hsl'
 	 sudo mv hsl /usr/local/include  # move hsl header files to /usr/local/include/
 	 cd /usr/local/lib 
 	 sudo mv libcoinhsl.so libhsl.so  # the Ipopt find hsl library named 'libhsl.so', so change the name. 

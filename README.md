@@ -1,5 +1,5 @@
 # Ipopt_Ubuntu Install
-This project is intended to install and use NLP Ipopt in the ubuntu ros environment. The programming language is C++ and VSCode.
+This project is intended to install and use NLP Ipopt in the ubuntu ros environment. The programming language is C++ and VSCode. After this, you can run the official example in /Ipopt/examples/hs071_cpp.
 - **Getting System Packages (Compilers,...)**
 `sudo apt-get install gcc g++ gfortran git patch wget pkg-config liblapack-dev libmetis-dev` 
 
@@ -16,7 +16,8 @@ This project is intended to install and use NLP Ipopt in the ubuntu ros environm
 	mkdir ThirdParty/coinhsl/build
 	sudo apt-get install meson
 	cd ThirdParty/coinhsl/build
-	meson setup --buildtype=release --prefix=/home/boren/Downloads/ThirdParty/ ..  # Please change the path'/home/boren' to your own account name.
+	meson setup --buildtype=release --prefix=/home/boren/Downloads/ThirdParty/ ..  
+	# Please change the path'/home/boren' to your own account name.
 	ninja
 	ninja install
 	cd ~/Downloads/ThirdParty
@@ -43,3 +44,31 @@ This project is intended to install and use NLP Ipopt in the ubuntu ros environm
 	make
 	make test
 	sudo make install
+	```
+	Now in 'include_directories' `/usr/local/include` you can see `coin-or` folder, which contains the header files of Ipopt, and 'target_link_directories' `/usr/local/lib`, you can see Ipopt library files. 
+	
+ # Run Ipopt Example
+ - **Build ros working space**.  In the path you like, in my case is home path, build ros work space (Please refer to  [Build ROS WorkSpace](https://github.com/BorenJ/ChernoCPPSeriesPractice/tree/main), from section 1 to 4. 
+ - **Copy examples**. Copy examples in  `/home/boren/Ipopt/examples/` ( `hs071_main.cpp`,`hs071_nlp.cpp`,`hs071_nlp.hpp` ), to ros packages src, in my case is `opt_ws/src/opt_pack/src`, where 'op_ws' is ros working space and 'opt_pack' is ros package. 
+ - **CMakeLists.txt**. Add following codes to CMakeList.txt
+	```
+	include_directories(
+	${catkin_INCLUDE_DIRS}
+	"/usr/local/include/coin-or"
+	)
+	
+	add_executable(OPT src/hs071_main.cpp src/hs071_nlp.cpp)
+	
+	target_link_libraries(OPT
+	${catkin_LIBRARIES}
+	"/usr/local/lib/libipopt.so"
+	)
+	 ```
+	 In VSCode terminal,
+	 ```
+	source ./devel/setup.bash
+	echo $LD_LIBRARY_PATH
+	export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+	 ```
+ - Finally, you can run `rosrun opt_pack OPT` VSCode terminal and see the results.
+ - In VSCode, you may see red wavy underline for `#include  "IpIpoptApplication.hpp"` .etc, in this case, simply write as `#include  "coin-or/IpIpoptApplication.hpp"` will be fine.

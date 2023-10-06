@@ -39,7 +39,6 @@ This project is intended to install and use NLP Ipopt in the ubuntu ros environm
 	git clone https://github.com/coin-or/Ipopt.git
 	cd Ipopt
 	mkdir build
-	cd build
 	./configure
 	make
 	make test

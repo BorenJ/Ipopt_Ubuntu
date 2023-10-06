@@ -16,8 +16,10 @@ This project is intended to install and use NLP Ipopt in the ubuntu ros environm
 	mkdir ThirdParty/coinhsl/build
 	sudo apt-get install meson
 	cd ThirdParty/coinhsl/build
+	 ``` 
+	 **Please pay attention!** Please change the path`/home/boren` to your own account name for the following code.
+	 ```
 	meson setup --buildtype=release --prefix=/home/boren/Downloads/ThirdParty/ ..  
-	# Please change the path'/home/boren' to your own account name.
 	ninja
 	ninja install
 	cd ~/Downloads/ThirdParty

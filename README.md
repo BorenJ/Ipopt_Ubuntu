@@ -72,5 +72,6 @@ This project is intended to install and use NLP Ipopt in the ubuntu ros environm
 	echo $LD_LIBRARY_PATH
 	export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 	 ```
- - Finally, you can run `rosrun opt_pack OPT` VSCode terminal and see the results.
+	 
+ - Finally, `Ctrl + Shift + B` compile the package, and you can run `rosrun opt_pack OPT` VSCode terminal and see the results.
  - In VSCode, you may see red wavy underline for `#include  "IpIpoptApplication.hpp"` .etc, in this case, simply write as `#include  "coin-or/IpIpoptApplication.hpp"` will be fine.
